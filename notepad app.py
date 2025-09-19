@@ -1,10 +1,15 @@
 import streamlit as st
 
-st.title("Indian Railways Traffic Optimizer 🚆")
-st.write("This is a demo AI-powered decision support system for train scheduling.")
+st.title("📝 Notepad App")
 
-train = st.text_input("Enter Train Name:")
-priority = st.selectbox("Select Priority:", ["High", "Medium", "Low"])
+text = st.text_area("Write your notes here:")
 
-if st.button("Optimize"):
-    st.success(f"Train {train} with {priority} priority scheduled successfully!")
+if st.button("Save Note"):
+    with open("notes.txt", "a") as f:
+        f.write(text + "\n")
+    st.success("Note saved!")
+
+if st.button("Show Saved Notes"):
+    with open("notes.txt", "r") as f:
+        notes = f.read()
+    st.text_area("Your Notes:", notes, height=200)
